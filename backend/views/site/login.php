@@ -5,31 +5,34 @@
 /* @var $model \common\models\LoginForm */
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use BomCMS\AdminLTE\ActiveForm;
 
-$this->title = 'Login';
+$this->title = 'Đăng nhập';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to login:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
+<div class="login-box">
+    <div class="login-logo">
+        <?= Html::a("<b>Bom</b>CMS", '/'); ?>
+    </div>
+    <div class="login-box-body">
+        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+        <div class="form-group has-feedback">
+            <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+            <!--                    <span class="glyphicon glyphicon-user form-control-feedback"></span>-->
         </div>
+        <div class="form-group has-feedback">
+            <?= $form->field($model, 'password')->passwordInput() ?>
+            <!--                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>-->
+        </div>
+        <div class="row">
+            <div class="col-xs-7">
+                <?= $form->field($model, 'rememberMe')->checkbox() ?>
+            </div>
+            <div class="col-xs-5">
+                <?= Html::submitButton('Login', ['class' => 'btn btn-primary form-control', 'name' => 'login-button']) ?>
+            </div>
+        </div>
+        <?php ActiveForm::end(); ?>
     </div>
 </div>
+
