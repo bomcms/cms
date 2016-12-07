@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use backend\assets\AppAsset;
+use BomCMS\AdminLTE\Menu;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -22,57 +23,58 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="layout-boxed sidebar-mini skin-blue-light">
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+<div class="wrapper">
+    <header class="main-header">
+        <?= Html::a('<span class="logo-lg"><b>Admin</b>LTE</span>', '/admin', ['class' => 'logo']); ?>
+        <nav class="navbar navbar-static-top"></nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <?= Menu::widget([
+                'items' => [
+                    [
+                        'label' => 'Home',
+                        'url' => ['site/index'],
+                        'icon' => 'fa fa-home'],
+                    [
+                        'label' => 'Products',
+                        'url' => ['product/index'],
+                        'items' => [
+                            [
+                                'label' => 'New Arrivals',
+                                'url' => ['product/index']
+                            ],
+                            [
+                                'label' => 'Most Popular',
+                                'url' => ['product/index']
+                            ],
+                        ]],
+                    [
+                        'label' => 'Thoát',
+                        'url' => ['site/logout'],
+                        'template' => '<a href="{url}" data-method="post"><i class="{icon}"></i> {label}</a>',
+                        'icon' => 'fa fa-sign-out',
+                        'visible' => !Yii::$app->user->isGuest
+                    ],
+                ],
+            ]) ?>
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <section class="content">
+            <?= Alert::widget() ?>
+            <?= $content ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+        </section>
     </div>
+    <footer class="main-footer">
+        <p class="pull-right hidden-xs"><?= Yii::powered() ?></p>
+        &copy; My Company <?= date('Y') ?>
+    </footer>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
-
 <?php $this->endBody() ?>
 </body>
 </html>
