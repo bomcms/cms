@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use BomCMS\MediaLak\YoutubeAPI;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -72,6 +73,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        YoutubeAPI::getLink('12eHC5V8kMo');
+        exit();
         return $this->render('index');
     }
 
