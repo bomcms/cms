@@ -79,8 +79,9 @@ class SiteController extends Controller
     }
 
     public function actionPlay($video_id) {
+        $videos = YoutubeAPI::getLink($video_id);
         return $this->render('index', [
-            'video_id' => $video_id
+            'videos' => $videos
         ]);
     }
     /**
