@@ -73,11 +73,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        YoutubeAPI::getLink('12eHC5V8kMo');
+        YoutubeAPI::getLink('cnR1Yj7NIgE');
         exit();
         return $this->render('index');
     }
 
+    public function actionPlay($video_id) {
+        return $this->render('index', [
+            'video_id' => $video_id
+        ]);
+    }
     /**
      * Logs in a user.
      *
