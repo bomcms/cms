@@ -17,7 +17,7 @@ jwplayer.key="cnTBVyNpY6vj4TxvNAA18lqtvQ2pxVXFjVBp8A==";
 $(document).ready(function() {
     jwplayer("player").setup({
         image: "//content.jwplatform.com/thumbs/C4lp6Dtd-640.jpg",
-        sources: ['. $videos['videos']['sources'] .'],
+        sources: '. $videos['videos']['sources'] .',
         aspectratio: "16:9",
         width: "100%"
     });
